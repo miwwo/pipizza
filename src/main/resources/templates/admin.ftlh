@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BUYSELL</title>
+    <title>Pipizza</title>
 </head>
 <body>
-<h1>BUYSELL</h1>
+<h1>Pipizza</h1>
 <hr>
 <h4>Панель администратора</h4>
 <table border="1">

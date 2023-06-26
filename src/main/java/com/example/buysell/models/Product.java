@@ -25,8 +25,6 @@ public class Product {
     private String description;
     @Column(name = "price")
     private int price;
-    @Column(name = "city")
-    private String city;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
     mappedBy = "product")
     private List<Image> images = new ArrayList<>();
