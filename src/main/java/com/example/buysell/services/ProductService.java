@@ -23,8 +23,11 @@ public class ProductService {
     private final UserRepository userRepository;
 
     public List<Product> listProducts(String title) {
-        if (title != null) return productRepository.findByTitle(title);
-        return productRepository.findAll();
+        if (title != null && !title.isEmpty()) {
+            return productRepository.findByTitle(title);
+        } else {
+            return productRepository.findAll();
+        }
     }
 
     public void saveProduct(Principal principal, Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {

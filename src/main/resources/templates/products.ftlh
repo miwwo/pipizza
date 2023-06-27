@@ -18,14 +18,20 @@
 <#else>
     <a href="/login">Войти</a></h1>
 </#if>
-<hr>
-<form action="/" method="get">
-    Поиск по названию объявления: <input type="text" name="title">
-    <input type="submit" value="Поиск"/>
+<form method="get" action="/">
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <label for="searchWord">Поиск по объявлениям</label>
+            <input type="text" name="searchWord" <#if searchWord??>value="${searchWord}"</#if> class="form-control"
+                   id="searchWord">
+        </div>
+        <button type="submit" class="btn btn-dark">Поиск</button>
+    </div>
 </form>
+<hr>
 <#list products as product>
     <div>
-        <p><b>${product.title}</b> ${product.previewImageId} ${product.price} руб. | <a href="/product/${product.id}">Подробнее...</a></p>
+        <p><b>${product.title}</b><br> <img src="/images/${product.previewImageId}" height="200px"/> ${product.price} руб. | <a href="/product/${product.id}">Подробнее...</a></p>
     </div>
 <#else>
     <h3>Товаров нет</h3>
