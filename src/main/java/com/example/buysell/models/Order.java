@@ -22,6 +22,7 @@ public class Order {
     private Long id;
     @Column(name = "total")
     private double total;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "order")
     private List<Product> orderComponents = new ArrayList<>();
@@ -35,5 +36,10 @@ public class Order {
     private void init() {
         dateOfCreated = LocalDateTime.now();
         total = 0;
+    }
+
+    private void addProduct(Product product){
+        this.total = total + product.getPrice();
+        orderComponents.add(product);
     }
 }

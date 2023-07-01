@@ -1,8 +1,10 @@
 package com.example.buysell.controllers;
 
+import com.example.buysell.models.Order;
 import com.example.buysell.models.Product;
 import com.example.buysell.services.OrderService;
 import com.example.buysell.services.ProductService;
+import com.example.buysell.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,35 +20,36 @@ import java.security.Principal;
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
-    private final ProductService productService;
     private final OrderService orderService;
+    private final UserService userService;
 
     @GetMapping("/")
-    public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
-        model.addAttribute("products", productService.listProducts(title));
-        model.addAttribute("user", productService.getUserByPrincipal(principal));
-        model.addAttribute("searchWord", title);
-        return "products";
+    public String orders(Principal principal, Model model) {
+        model.addAttribute("orders", orderService.listOrder());
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "myPage";
+    }
+    @GetMapping("/order/{id}")
+    public String orderInfo(@PathVariable Long id, Model model) {
+        Order order = orderService.getOrderById(id);
+        model.addAttribute("order", order);
+        return "order-info";
     }
 
-    @GetMapping("/product/{id}")
-    public String productInfo(@PathVariable Long id, Model model) {
-        Product product = productService.getProductById(id);
-        model.addAttribute("product", product);
-        model.addAttribute("images", product.getImages());
-        return "product-info";
+    @PostMapping("/order/create")
+    public String createOrder(Product product, Principal principal) throws IOException {
+        orderService.saveOrder(product);
+        return "redirect:/";
     }
-
-    @PostMapping("/product/create")
-    public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
-                                @RequestParam("file3") MultipartFile file3, Product product) throws IOException {
-        productService.saveProduct(product, file1, file2, file3);
+    @PostMapping("/order/add/{id}")
+    public String addOrder(Product product, Principal principal) throws IOException {
+        orderService.saveOrder(product);
         return "redirect:/";
     }
 
-    @PostMapping("/product/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
+    @PostMapping("/order/delete/{id}")
+    public String deleteOrder(@PathVariable Long id) {
+        orderService.deleteOrder(id);
         return "redirect:/";
     }
 }

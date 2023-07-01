@@ -29,32 +29,17 @@ public class ProductService {
         }
     }
 
-    public void saveProduct(Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+    public void saveProduct(Product product, MultipartFile file1) throws IOException {
         Image image1;
-        Image image2;
-        Image image3;
         if (file1.getSize() != 0) {
             image1 = toImageEntity(file1);
             image1.setPreviewImage(true);
             product.addImageToProduct(image1);
         }
-        if (file2.getSize() != 0) {
-            image2 = toImageEntity(file2);
-            product.addImageToProduct(image2);
-        }
-        if (file3.getSize() != 0) {
-            image3 = toImageEntity(file3);
-            product.addImageToProduct(image3);
-        }
         log.info("Saving new Product. Title: {}; ", product.getTitle());
         Product productFromDb = productRepository.save(product);
         productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);
-    }
-
-    public User getUserByPrincipal(Principal principal) {
-        if (principal == null) return new User();
-        return userRepository.findByEmail(principal.getName());
     }
 
     private Image toImageEntity(MultipartFile file) throws IOException {

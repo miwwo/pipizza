@@ -2,6 +2,7 @@ package com.example.buysell.controllers;
 
 import com.example.buysell.models.Product;
 import com.example.buysell.services.ProductService;
+import com.example.buysell.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +19,12 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final UserService userService;
 
     @GetMapping("/")
     public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
         model.addAttribute("products", productService.listProducts(title));
-        model.addAttribute("user", productService.getUserByPrincipal(principal));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
         return "products";
     }
@@ -36,9 +38,8 @@ public class ProductController {
     }
 
     @PostMapping("/product/create")
-    public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
-                                @RequestParam("file3") MultipartFile file3, Product product) throws IOException {
-        productService.saveProduct(product, file1, file2, file3);
+    public String createProduct(@RequestParam("file1") MultipartFile file1, Product product) throws IOException {
+        productService.saveProduct(product, file1);
         return "redirect:/";
     }
 

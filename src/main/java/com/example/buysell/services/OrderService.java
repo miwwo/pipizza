@@ -1,6 +1,7 @@
 package com.example.buysell.services;
 
 import com.example.buysell.models.Order;
+import com.example.buysell.models.Product;
 import com.example.buysell.repositories.OrderRepository;
 import com.example.buysell.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,8 @@ public class OrderService {
 
     public Order getOrderById(Long id) {
         return orderRepository.findById(id).orElse(null);
+    }
+
+    public void saveOrder(Product product) {
     }
 }
