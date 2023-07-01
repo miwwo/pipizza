@@ -25,13 +25,15 @@ public class Product {
     private String description;
     @Column(name = "price")
     private int price;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-    mappedBy = "product")
+            mappedBy = "product")
     private List<Image> images = new ArrayList<>();
     private Long previewImageId;
+
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
-    private User user;
+    private Order order;
     private LocalDateTime dateOfCreated;
 
     @PrePersist
