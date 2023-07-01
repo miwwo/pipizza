@@ -1,6 +1,7 @@
 package com.example.buysell.controllers;
 
 import com.example.buysell.models.Product;
+import com.example.buysell.services.OrderService;
 import com.example.buysell.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,9 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
-public class ProductController {
+public class OrderController {
     private final ProductService productService;
+    private final OrderService orderService;
 
     @GetMapping("/")
     public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
