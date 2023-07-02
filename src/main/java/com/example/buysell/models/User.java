@@ -30,6 +30,9 @@ public class User implements UserDetails {
     @Column(name = "password", length = 1000)
     private String password;
 
+    @ElementCollection
+    private List<Product> cart = new ArrayList<>();
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
     joinColumns = @JoinColumn(name = "user_id"))
@@ -38,9 +41,6 @@ public class User implements UserDetails {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
-
-
-
 
     // security
 

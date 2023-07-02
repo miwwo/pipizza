@@ -14,8 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class
-Product {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -35,13 +34,6 @@ Product {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private Order order;
-    private LocalDateTime dateOfCreated;
-
-    @PrePersist
-    private void init() {
-        dateOfCreated = LocalDateTime.now();
-    }
-
 
     public void addImageToProduct(Image image) {
         image.setProduct(this);

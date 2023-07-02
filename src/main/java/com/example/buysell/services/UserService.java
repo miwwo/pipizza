@@ -27,7 +27,7 @@ public class UserService {
         if (userRepository.findByEmail(email) != null) return false;
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_USER);
+        user.getRoles().add(Role.ROLE_ADMIN);
         log.info("Saving new User with email: {}", email);
         userRepository.save(user);
         return true;
@@ -52,6 +52,10 @@ public class UserService {
                 log.info("Unban user with id = {}; email: {}", user.getId(), user.getEmail());
             }
         }
+        userRepository.save(user);
+    }
+
+    public void saveUser(User user){
         userRepository.save(user);
     }
 }

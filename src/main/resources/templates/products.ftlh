@@ -28,6 +28,11 @@
 <#else>
     <a href="/login">Войти</a></h1>
 </#if>
+<form action="/user/cart" method="get">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <button type="submit"/>Корзина</button>
+</form>
+<a href="/user/cart">Корзина</a>
 <form method="get" action="/">
     <div class="form-row">
         <div class="form-group col-md-10">
@@ -41,8 +46,14 @@
 <hr>
 <#list products as product>
     <div>
-        <p><b>${product.title}</b><br> <img src="/images/${product.previewImageId}" height="200px"/> ${product.price} руб. | <a href="/product/${product.id}">Подробнее...</a></p>
-
+        <p><b>${product.title}</b><br>
+            <img src="/images/${product.previewImageId}" height="200px"/>
+            ${product.price} руб.
+        <form action="/user/cart/add/product/${product.getId()}" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <button type="submit"/>Добавить</button>
+        </form>
+        | <a href="/product/${product.id}">Подробнее...</a></p>
     </div>
 <#else>
     <h3>Товаров нет</h3>

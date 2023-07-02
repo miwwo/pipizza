@@ -23,7 +23,7 @@ public class OrderController {
     private final OrderService orderService;
     private final UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("/orders")
     public String orders(Principal principal, Model model) {
         model.addAttribute("orders", orderService.listOrder());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -36,16 +36,11 @@ public class OrderController {
         return "order-info";
     }
 
-    @PostMapping("/order/create")
+    /*@PostMapping("/order/create")
     public String createOrder(Product product, Principal principal) throws IOException {
         orderService.saveOrder(product);
         return "redirect:/";
-    }
-    @PostMapping("/order/add/{id}")
-    public String addOrder(Product product, Principal principal) throws IOException {
-        orderService.saveOrder(product);
-        return "redirect:/";
-    }
+    }*/
 
     @PostMapping("/order/delete/{id}")
     public String deleteOrder(@PathVariable Long id) {
