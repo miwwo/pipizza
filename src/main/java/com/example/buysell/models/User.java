@@ -28,8 +28,18 @@ public class User implements UserDetails {
     @Column(name = "password", length = 1000)
     private String password;
 
-    @ElementCollection
+    /*@ElementCollection
+    private List<Product> cart = new ArrayList<>();*/
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "cart_products",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private List<Product> cart = new ArrayList<>();
+
     private double total = 0;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
