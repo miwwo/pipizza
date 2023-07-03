@@ -4,10 +4,8 @@ import com.example.buysell.models.enums.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -32,6 +30,7 @@ public class User implements UserDetails {
 
     @ElementCollection
     private List<Product> cart = new ArrayList<>();
+    private double total = 0;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",

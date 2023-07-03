@@ -37,15 +37,4 @@ public class ProductController {
         return "product-info";
     }
 
-    @PostMapping("/product/create")
-    public String createProduct(@RequestParam("file1") MultipartFile file1, Product product) throws IOException {
-        productService.saveProduct(product, file1);
-        return "redirect:/";
-    }
-
-    @PostMapping("/product/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
-        return "redirect:/";
-    }
 }

@@ -23,8 +23,7 @@ public class Order {
     @Column(name = "total")
     private double total;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "order")
+    @ElementCollection
     private List<Product> orderComponents = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -35,11 +34,8 @@ public class Order {
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
-        total = 0;
+        orderComponents.addAll(user.getCart());
+        setTotal(user.getTotal());
     }
 
-    private void addProduct(Product product){
-        this.total = total + product.getPrice();
-        orderComponents.add(product);
-    }
 }

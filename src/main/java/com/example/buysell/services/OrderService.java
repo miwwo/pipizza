@@ -2,6 +2,7 @@ package com.example.buysell.services;
 
 import com.example.buysell.models.Order;
 import com.example.buysell.models.Product;
+import com.example.buysell.models.User;
 import com.example.buysell.repositories.OrderRepository;
 import com.example.buysell.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,6 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
     }
@@ -28,6 +28,12 @@ public class OrderService {
         return orderRepository.findById(id).orElse(null);
     }
 
-    public void saveOrder(Product product) {
+    public void saveOrder(Order order) {orderRepository.save(order);}
+
+    public void createOrder(User user){
+        Order order = new Order();
+        order.setUser(user);
+        orderRepository.save(order);
     }
+
 }

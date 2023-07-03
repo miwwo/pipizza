@@ -14,7 +14,6 @@
         <th>Активность</th>
         <th>Роли</th>
         <th>Бан</th>
-        <th>Редактирование</th>
         <th>Подробная информация</th>
     </tr>
     <#list users as user>
@@ -29,7 +28,6 @@
                     <input type="submit" value="Бан">
                 </form>
             </th>
-            <th><a href="/admin/user/edit/${user.id}">Редактировние</a></th>
             <th><a href="/user/${user.id}">Подробная информация</a></th>
         </tr>
     <#else>

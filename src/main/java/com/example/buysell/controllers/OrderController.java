@@ -2,6 +2,8 @@ package com.example.buysell.controllers;
 
 import com.example.buysell.models.Order;
 import com.example.buysell.models.Product;
+import com.example.buysell.models.User;
+import com.example.buysell.repositories.OrderRepository;
 import com.example.buysell.services.OrderService;
 import com.example.buysell.services.ProductService;
 import com.example.buysell.services.UserService;
@@ -23,12 +25,6 @@ public class OrderController {
     private final OrderService orderService;
     private final UserService userService;
 
-    @GetMapping("/orders")
-    public String orders(Principal principal, Model model) {
-        model.addAttribute("orders", orderService.listOrder());
-        model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "myPage";
-    }
     @GetMapping("/order/{id}")
     public String orderInfo(@PathVariable Long id, Model model) {
         Order order = orderService.getOrderById(id);
@@ -36,11 +32,14 @@ public class OrderController {
         return "order-info";
     }
 
-    /*@PostMapping("/order/create")
-    public String createOrder(Product product, Principal principal) throws IOException {
-        orderService.saveOrder(product);
-        return "redirect:/";
-    }*/
+    @PostMapping("/user/create/order")
+    public String createOrder(Principal principal) throws IOException {
+        User user = userService.getUserByPrincipal(principal);
+        orderService.createOrder(user);
+        user.getCart().clear();
+        userService.saveUser(user);
+        return "redirect:/account";
+    }
 
     @PostMapping("/order/delete/{id}")
     public String deleteOrder(@PathVariable Long id) {

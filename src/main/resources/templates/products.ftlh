@@ -12,6 +12,8 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="submit" value="Выйти"/>
     </form>
+    <a href="/account">Личный кабинет</a>
+    <a href="/user/cart">Корзина</a>
     <#if user.isAdmin()>
         <a href="/admin">Панель администратора</a>
         <hr>
@@ -28,11 +30,6 @@
 <#else>
     <a href="/login">Войти</a></h1>
 </#if>
-<form action="/user/cart" method="get">
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <button type="submit"/>Корзина</button>
-</form>
-<a href="/user/cart">Корзина</a>
 <form method="get" action="/">
     <div class="form-row">
         <div class="form-group col-md-10">
@@ -49,11 +46,27 @@
         <p><b>${product.title}</b><br>
             <img src="/images/${product.previewImageId}" height="200px"/>
             ${product.price} руб.
-        <form action="/user/cart/add/product/${product.getId()}" method="post">
+            <#--<#if !user.cart[product.getId()]??>
+                <form action="/user/cart/add/product/${product.getId()}" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <button type="submit/">В корзину</button>
+                </form>
+            <#else>
+                <label for="input">Число:${user.cart[product.getId()].quantity}</label>
+                <form action="/user/cart/add/product/${product.getId()}" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <button type="submit/">+</button>
+                </form>
+                <form action="/user/cart/remove/product/${product.getId()}" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <button type="submit/">-</button>
+                </form>
+            </#if>-->
+            <form action="/user/cart/add/product/${product.getId()}" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit"/>Добавить</button>
-        </form>
-        | <a href="/product/${product.id}">Подробнее...</a></p>
+            <button type="submit/">В корзину</button>
+            </form>
+        <a href="/product/${product.id}">Подробнее...</a></p>
     </div>
 <#else>
     <h3>Товаров нет</h3>

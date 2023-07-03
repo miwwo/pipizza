@@ -40,18 +40,30 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @GetMapping("/user/{user}")
-    public String userInfo(@PathVariable("user") User user, Model model) {
-        model.addAttribute("user", user);
-        model.addAttribute("products", user.getOrders());
-        return "user-info";
+    @GetMapping("/account")
+    public String userInfo(Model model, Principal principal) {
+            model.addAttribute("user", userService.getUserByPrincipal(principal));
+            model.addAttribute("orders", userService.getUserByPrincipal(principal).getOrders());
+            return "account";
     }
 
     @PostMapping("/user/cart/add/product/{id}")
     public String addProduct(@PathVariable Long id, Principal principal) throws IOException {
-        userService.getUserByPrincipal(principal).getCart().add(productService.getProductById(id));
+        if (principal == null)
+            return "redirect:/login";
+        User user =  userService.getUserByPrincipal(principal);
+        Product product = productService.getProductById(id);
+        userService.addProduct(user,product);
         userService.saveUser(userService.getUserByPrincipal(principal));
         return "redirect:/";
+    }
+    @PostMapping("/user/cart/remove/product/{id}")
+    public String removeProduct(@PathVariable Long id, Principal principal) throws IOException {
+        User user =  userService.getUserByPrincipal(principal);
+        Product product = productService.getProductById(id);
+        userService.removeProduct(user,product);
+        userService.saveUser(userService.getUserByPrincipal(principal));
+        return "redirect:/user/cart";
     }
 
     @GetMapping("/user/cart")
@@ -61,4 +73,5 @@ public class UserController {
         model.addAttribute("cart_products", user.getCart());
         return "cart";
     }
+
 }
