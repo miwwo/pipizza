@@ -23,7 +23,15 @@ public class Order {
     @Column(name = "total")
     private double total;
 
-    @ElementCollection
+    /*@ElementCollection
+    private List<Product> orderComponents = new ArrayList<>();*/
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "order_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private List<Product> orderComponents = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -34,8 +42,8 @@ public class Order {
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
-        orderComponents.addAll(user.getCart());
-        setTotal(user.getTotal());
+        //orderComponents.addAll(user.getCart());
+        //setTotal(user.getTotal());
     }
 
 }

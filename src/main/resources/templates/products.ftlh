@@ -42,32 +42,34 @@
 </form>
 <hr>
 <#list products as product>
-    <div>
-        <p><b>${product.title}</b><br>
-            <img src="/images/${product.previewImageId}" height="200px"/>
-            ${product.price} руб.
-            <#--<#if !user.cart[product.getId()]??>
-                <form action="/user/cart/add/product/${product.getId()}" method="post">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    <button type="submit/">В корзину</button>
-                </form>
-            <#else>
-                <label for="input">Число:${user.cart[product.getId()].quantity}</label>
-                <form action="/user/cart/add/product/${product.getId()}" method="post">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    <button type="submit/">+</button>
-                </form>
-                <form action="/user/cart/remove/product/${product.getId()}" method="post">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    <button type="submit/">-</button>
-                </form>
-            </#if>-->
+    <#if product.isMenuComponent()>
+        <div>
+            <p><b>${product.title}</b><br>
+                <img src="/images/${product.previewImageId}" height="200px"/>
+                ${product.price} руб.
+                <#--<#if !user.cart[product.getId()]??>
+                    <form action="/user/cart/add/product/${product.getId()}" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <button type="submit/">В корзину</button>
+                    </form>
+                <#else>
+                    <label for="input">Число:${user.cart[product.getId()].quantity}</label>
+                    <form action="/user/cart/add/product/${product.getId()}" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <button type="submit/">+</button>
+                    </form>
+                    <form action="/user/cart/remove/product/${product.getId()}" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <button type="submit/">-</button>
+                    </form>
+                </#if>-->
             <form action="/user/cart/add/product/${product.getId()}" method="post">
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit/">В корзину</button>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <button type="submit/">В корзину</button>
             </form>
-        <a href="/product/${product.id}">Подробнее...</a></p>
-    </div>
+            <a href="/product/${product.id}">Подробнее...</a></p>
+        </div>
+    </#if>
 <#else>
     <h3>Товаров нет</h3>
 </#list>

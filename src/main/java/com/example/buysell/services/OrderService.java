@@ -32,8 +32,25 @@ public class OrderService {
 
     public void createOrder(User user){
         Order order = new Order();
+        List<Product> usersCart = user.getCart();
+
+        for (Product product : usersCart) {
+            order.getOrderComponents().add(new Product(
+                    product.getTitle(),
+                    product.getDescription(),
+                    product.getPrice(),
+                    product.getQuantity(),
+                    product.getPreviewImageId(),
+                    false));
+        }
+        order.setTotal(user.getTotal());
         order.setUser(user);
         orderRepository.save(order);
+
+        user.setTotal(0);
+        for (Product product: usersCart)
+            product.setQuantity(1);
+        usersCart.clear();
     }
 
 }

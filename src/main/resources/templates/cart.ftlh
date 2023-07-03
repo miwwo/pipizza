@@ -18,7 +18,7 @@
     <#else>
         <h3>Товаров нет</h3>
     </#list>
-    <#if  (user.cart?size > 0) >
+    <#if (user.cart?size > 0) >
         <h2>Сумма заказа: ${user.total}</h2>
         <form action="/user/create/order" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}">

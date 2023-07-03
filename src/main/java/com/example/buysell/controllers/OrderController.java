@@ -36,7 +36,6 @@ public class OrderController {
     public String createOrder(Principal principal) throws IOException {
         User user = userService.getUserByPrincipal(principal);
         orderService.createOrder(user);
-        user.getCart().clear();
         userService.saveUser(user);
         return "redirect:/account";
     }

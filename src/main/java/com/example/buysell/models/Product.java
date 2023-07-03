@@ -27,10 +27,26 @@ public class Product {
     private String description;
     @Column(name = "price")
     private int price;
+    @Column(name = "menu_component")
+    private boolean menuComponent = true;
     @Column()
     @NotNull
     @Min(value = 1, message = "Quantity must be greater than or equal to zero")
     private int quantity = 1;
+
+    public Product(String title,
+                   String description,
+                   int price,
+                   int quantity,
+                   Long previewImageId,
+                   boolean menuComponent) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.previewImageId = previewImageId;
+        this.menuComponent = menuComponent;
+    }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "product")
