@@ -75,10 +75,10 @@ public class UserService {
     public void removeProduct(User user, Product product){
         if (user.getCart().contains(product)) {
             user.getCart().remove(product);
-            if(product.getQuantity() - 1!=0){
+            user.setTotal(user.getTotal() - product.getPrice());
+            if (product.getQuantity() - 1 != 0){
                 product.setQuantity(product.getQuantity() - 1);
                 user.getCart().add(product);
-                user.setTotal(user.getTotal() - product.getPrice());
             }
         }
     }

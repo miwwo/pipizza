@@ -61,7 +61,7 @@ public class UserController {
     public String removeProduct(@PathVariable Long id, Principal principal) throws IOException {
         User user =  userService.getUserByPrincipal(principal);
         Product product = productService.getProductById(id);
-        userService.removeProduct(user,product);
+        userService.removeProduct(user, product);
         userService.saveUser(userService.getUserByPrincipal(principal));
         return "redirect:/user/cart";
     }
