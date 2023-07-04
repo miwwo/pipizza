@@ -5,12 +5,16 @@ import com.example.pipizza.models.User;
 import com.example.pipizza.services.ProductService;
 import com.example.pipizza.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
 
@@ -22,6 +26,21 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
+        return "login";
+    }
+
+    @GetMapping("/login-error")
+    public String login(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        String errorMessage = null;
+        if (session != null) {
+            AuthenticationException ex = (AuthenticationException) session
+                    .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+            if (ex != null) {
+                errorMessage = ex.getMessage();
+            }
+        }
+        model.addAttribute("errorMessage", "Введены неверные данные");
         return "login";
     }
 
@@ -41,12 +60,11 @@ public class UserController {
     }
 
     @GetMapping("/account")
-    public String userInfo(Model model, Principal principal) {
+    public String userAccount(Model model, Principal principal) {
             model.addAttribute("user", userService.getUserByPrincipal(principal));
             model.addAttribute("orders", userService.getUserByPrincipal(principal).getOrders());
             return "account";
     }
-
     @PostMapping("/user/cart/add/product/{id}")
     public String addProduct(@PathVariable Long id, Principal principal) throws IOException {
         if (principal == null)

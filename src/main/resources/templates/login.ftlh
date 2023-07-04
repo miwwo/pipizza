@@ -27,7 +27,6 @@
         <div class="card col-6">
             <div class="card-body">
                 <h1 class="card-title text-center"><strong>PIPIZZA</strong><img src="https://i.ibb.co/vqX1LfW/logo.png" alt="logo" border="0" style="width: 50px"></h1>
-
                 <hr>
                 <h4>Авторизация</h4>
                 <form action="/login" method="post">
@@ -42,7 +41,11 @@
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                     <input type="submit" class="btn custom-btn" value="ВОЙТИ"/>
                 </form>
-                <br>Если нет аккаунта, то <a href="/registration"><strong>зарегистрируйся!</strong></a>
+                <br>
+                <#if errorMessage??>
+                    <h2 style="color: red;font-size: 1rem">${errorMessage}</h2>
+                </#if>
+                Если нет аккаунта, то <a href="/registration"><strong>зарегистрируйся!</strong></a>
             </div>
         </div>
     </div>

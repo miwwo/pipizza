@@ -66,7 +66,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="title"><strong>PIPIZZA</strong><img src="https://i.ibb.co/vqX1LfW/logo.png" alt="logo" border="0" style="width: 50px"></h1>
+    <h1 class="title"><a href="/"><strong>PIPIZZA</strong> <img src="https://i.ibb.co/vqX1LfW/logo.png" alt="logo" border="0" style="width: 45px"></a></h1>
     <hr>
     <div class="adminPanel"></div>
     <#if user.email??>
@@ -125,11 +125,17 @@
                                 <h5 class="card-title"><a href="/product/${product.id}">${product.title}</a></h5>
                                 <p class="card-text">${product.price} руб.</p>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer d-flex justify-content-between align-items-center">
                                 <form action="/user/cart/add/product/${product.getId()}" method="post">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                                     <button type="submit" class="btn">В корзину</button>
                                 </form>
+                                <#if user.isAdmin()>
+                                    <form action="/product/delete/${product.getId()}" method="post">
+                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                        <button type="submit" style="border: 0"><img src="https://i.ibb.co/QQ4JzPC/remove.png" style="width: 30px;" alt="remove"></button>
+                                    </form>
+                                </#if>
                             </div>
                         </div>
                     </div>

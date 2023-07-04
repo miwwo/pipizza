@@ -50,8 +50,10 @@ public class ProductService {
         return image;
     }
 
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+    public void removeFromMenu(Long id) {
+        Product product = getProductById(id);
+        product.setMenuComponent(false);
+        productRepository.save(product);
     }
 
     public Product getProductById(Long id) {

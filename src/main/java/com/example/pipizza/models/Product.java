@@ -52,7 +52,7 @@ public class Product {
     private List<Image> images = new ArrayList<>();
     private Long previewImageId;
 
-    /*@ManyToMany(mappedBy = "cart")
+/*    @ManyToMany(mappedBy = "cart")
     private List<User> carts = new ArrayList<>();*/
 
     public void addImageToProduct(Image image) {
