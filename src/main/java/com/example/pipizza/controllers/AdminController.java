@@ -1,10 +1,8 @@
-package com.example.buysell.controllers;
+package com.example.pipizza.controllers;
 
-import com.example.buysell.models.Product;
-import com.example.buysell.models.User;
-import com.example.buysell.models.enums.Role;
-import com.example.buysell.services.ProductService;
-import com.example.buysell.services.UserService;
+import com.example.pipizza.models.Product;
+import com.example.pipizza.services.ProductService;
+import com.example.pipizza.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor

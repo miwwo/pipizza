@@ -1,6 +1,6 @@
-package com.example.buysell.repositories;
+package com.example.pipizza.repositories;
 
-import com.example.buysell.models.Order;
+import com.example.pipizza.models.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {

@@ -1,22 +1,16 @@
-package com.example.buysell.services;
+package com.example.pipizza.services;
 
-import com.example.buysell.models.Order;
-import com.example.buysell.models.Product;
-import com.example.buysell.models.User;
-import com.example.buysell.models.enums.Role;
-import com.example.buysell.repositories.UserRepository;
+import com.example.pipizza.models.Product;
+import com.example.pipizza.models.User;
+import com.example.pipizza.models.enums.Role;
+import com.example.pipizza.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j

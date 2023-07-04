@@ -1,10 +1,9 @@
-package com.example.buysell.services;
+package com.example.pipizza.services;
 
-import com.example.buysell.models.Order;
-import com.example.buysell.models.Product;
-import com.example.buysell.models.User;
-import com.example.buysell.repositories.OrderRepository;
-import com.example.buysell.repositories.UserRepository;
+import com.example.pipizza.models.Order;
+import com.example.pipizza.models.Product;
+import com.example.pipizza.models.User;
+import com.example.pipizza.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

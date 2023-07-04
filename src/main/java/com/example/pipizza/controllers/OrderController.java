@@ -1,20 +1,15 @@
-package com.example.buysell.controllers;
+package com.example.pipizza.controllers;
 
-import com.example.buysell.models.Order;
-import com.example.buysell.models.Product;
-import com.example.buysell.models.User;
-import com.example.buysell.repositories.OrderRepository;
-import com.example.buysell.services.OrderService;
-import com.example.buysell.services.ProductService;
-import com.example.buysell.services.UserService;
+import com.example.pipizza.models.Order;
+import com.example.pipizza.models.User;
+import com.example.pipizza.services.OrderService;
+import com.example.pipizza.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;

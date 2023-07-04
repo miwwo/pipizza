@@ -1,10 +1,10 @@
-package com.example.buysell;
+package com.example.pipizza;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BuysellApplicationTests {
+class PipizzaApplicationTests {
 
 	@Test
 	void contextLoads() {

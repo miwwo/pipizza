@@ -1,4 +1,4 @@
-package com.example.buysell.models;
+package com.example.pipizza.models;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

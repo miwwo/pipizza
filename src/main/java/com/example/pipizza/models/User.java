@@ -1,6 +1,6 @@
-package com.example.buysell.models;
+package com.example.pipizza.models;
 
-import com.example.buysell.models.enums.Role;
+import com.example.pipizza.models.enums.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

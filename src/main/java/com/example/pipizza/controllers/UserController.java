@@ -1,9 +1,9 @@
-package com.example.buysell.controllers;
+package com.example.pipizza.controllers;
 
-import com.example.buysell.models.Product;
-import com.example.buysell.models.User;
-import com.example.buysell.services.ProductService;
-import com.example.buysell.services.UserService;
+import com.example.pipizza.models.Product;
+import com.example.pipizza.models.User;
+import com.example.pipizza.services.ProductService;
+import com.example.pipizza.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

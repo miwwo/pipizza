@@ -1,19 +1,16 @@
-package com.example.buysell.services;
+package com.example.pipizza.services;
 
-import com.example.buysell.models.Image;
-import com.example.buysell.models.Product;
-import com.example.buysell.models.User;
-import com.example.buysell.repositories.ProductRepository;
-import com.example.buysell.repositories.UserRepository;
+import com.example.pipizza.models.Image;
+import com.example.pipizza.models.Product;
+import com.example.pipizza.repositories.ProductRepository;
+import com.example.pipizza.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Slf4j
