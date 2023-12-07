@@ -28,7 +28,6 @@
         <a href="/"><strong>PIPIZZA</strong> <img src="https://i.ibb.co/vqX1LfW/logo.png" alt="logo" border="0" style="width: 45px"></a>
     </h1>
     <div class="mt-4">
-        <#if user.email??>
             <h3>Корзина пользователя: ${user.name}</h3>
             <#list cart_products as cart_product>
                 <div class="card mb-1">
@@ -38,7 +37,7 @@
                         <p class="card-text">Количество: ${cart_product.quantity}</p>
                         <div class="text-right">
                             <a href="/product/${cart_product.id}" class="btn btn-primary">Подробнее...</a>
-                            <form action="/user/cart/remove/product/${cart_product.getId()}" method="post" class="d-inline ml-2">
+                            <form action="/cart/remove/product/${cart_product.getId()}" method="post" class="d-inline ml-2">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                                 <button type="submit" class="btn btn-danger">Удалить</button>
                             </form>
@@ -53,14 +52,11 @@
                     <button type="submit" class="btn btn-success">Сделать заказ!</button>
                 </form>
             <#else>
+                <h3>Корзина пока пустая, но Вы можете это исправить!
+                    <br><a href="/" style="color: orange; font-weight: bold">Перейдите туда, где вкусная пицца!</a></h3>
+                <img src="https://i.ibb.co/Zm2JL34/pizza-cat.gif" alt="pizza-cat" border="0">
+            </#if>
 
-            </#if>
-            <#if errorMessage??>
-                <h2 style="color: red">${errorMessage}</h2>
-            </#if>
-        <#else>
-            <h2><a href="/login">Авторизируйтесь</a> или <a href="/registration">зарегистрируйтесь</a>, чтобы заказать у нас вкуснейшую пиццу!</h2>
-        </#if>
     </div>
 </div>
 

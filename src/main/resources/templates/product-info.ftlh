@@ -20,6 +20,9 @@
             top: 10px;
             left: 10px
         }
+        p{
+            font-size: large;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +30,7 @@
     <h1 class="title">
         <a href="/"><strong>PIPIZZA</strong> <img src="https://i.ibb.co/vqX1LfW/logo.png" alt="logo" border="0" style="width: 45px"></a>
     </h1>
-    <h4 class="mt-4">Подробная информация о товаре</h4>
+    <h4 class="mt-4"></h4>
     <div class="mt-4">
         <#list images as img>
             <img src="/images/${img.id}" height="500px" class="mb-4"/><br>

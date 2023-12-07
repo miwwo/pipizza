@@ -66,7 +66,7 @@ public class UserController {
             model.addAttribute("orders", userService.getUserByPrincipal(principal).getOrders());
             return "account";
     }
-    @PostMapping("/user/cart/add/product/{id}")
+    @PostMapping("/cart/add/product/{id}")
     public String addProduct(@PathVariable Long id, Principal principal) throws IOException {
         if (principal == null)
             return "redirect:/login";
@@ -76,16 +76,16 @@ public class UserController {
         userService.saveUser(userService.getUserByPrincipal(principal));
         return "redirect:/";
     }
-    @PostMapping("/user/cart/remove/product/{id}")
+    @PostMapping("/cart/remove/product/{id}")
     public String removeProduct(@PathVariable Long id, Principal principal) throws IOException {
         User user =  userService.getUserByPrincipal(principal);
         Product product = productService.getProductById(id);
         userService.removeProduct(user, product);
         userService.saveUser(userService.getUserByPrincipal(principal));
-        return "redirect:/user/cart";
+        return "redirect:/cart";
     }
 
-    @GetMapping("/user/cart")
+    @GetMapping("/cart")
     public String getCart(Principal principal, Model model) {
         User user = userService.getUserByPrincipal(principal);
         model.addAttribute("user", user);

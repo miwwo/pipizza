@@ -45,11 +45,9 @@
             </div>
         </div>
     <#else>
-        <h3>Заказов нет</h3>
+        <h3>Заказов пока нет, но Вы можете это исправить!<br><a href="/" style="color: orange; font-weight: bold">Перейдите туда, где вкусная пицца!</a></h3>
+        <img src="https://i.ibb.co/Fb4RwBT/pizza.gif" alt="pizza" border="0">
     </#list>
-    <#if errorMessage??>
-        <h2 style="color: red">${errorMessage}</h2>
-    </#if>
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
