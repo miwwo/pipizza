@@ -52,6 +52,8 @@
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                     <button type="submit" class="btn btn-success">Сделать заказ!</button>
                 </form>
+            <#else>
+
             </#if>
             <#if errorMessage??>
                 <h2 style="color: red">${errorMessage}</h2>

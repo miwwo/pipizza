@@ -21,7 +21,7 @@ public class ProductService {
 
     public List<Product> listProducts(String title) {
         if (title != null && !title.isEmpty()) {
-            return productRepository.findByTitle(title);
+            return productRepository.findByTitleContaining(title);
         } else {
             return productRepository.findAll();
         }

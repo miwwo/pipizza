@@ -4,20 +4,21 @@
     <title>Pipizza</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
-        body{
+        body {
             font-family: Georgia, serif;
         }
+
         .card {
             width: 100%;
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
-            padding-bottom: 20px;
             transition: transform 0.3s ease;
         }
 
         .card-img-top {
-            height: 200px;
+            height: 250px;
+            padding-left: 11px;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
@@ -32,10 +33,12 @@
             flex-direction: column;
             justify-content: space-between;
         }
+
         a {
             color: #000000;
             text-decoration: none;
         }
+
         a:hover {
             color: #000000;
             text-decoration: none;
@@ -46,19 +49,23 @@
             top: 10px;
             right: 10px;
         }
-        .title{
+
+        .title {
             position: absolute;
             top: 10px;
             left: 10px
         }
-        .btn{
+
+        .btn {
             border-color: #ffa600;
             border-radius: 50px;
             background-color: #ffa600;
         }
-        .menu{
+
+        .menu {
             margin-top: 10%;
         }
+
         body {
             max-width: 100%;
         }
@@ -66,7 +73,8 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="title"><a href="/"><strong>PIPIZZA</strong> <img src="https://i.ibb.co/vqX1LfW/logo.png" alt="logo" border="0" style="width: 45px"></a></h1>
+    <h1 class="title"><a href="/"><strong>PIPIZZA</strong> <img src="https://i.ibb.co/vqX1LfW/logo.png" alt="logo"
+                                                                border="0" style="width: 45px"></a></h1>
     <hr>
     <div class="adminPanel"></div>
     <#if user.email??>
@@ -109,8 +117,9 @@
         <form method="get" action="/" class="d-flex align-items-center">
             <div class="form-group col-md-10 d-flex align-items-center justify-content-between">
                 <label for="searchWord"></label>
-                <input placeholder="Поиск" type="text" name="searchWord" <#if searchWord??>value="${searchWord}"</#if> class="form-control">
-                <button type="submit" class="btn">Поиск</button>
+                <input placeholder="Поиск" type="text" name="searchWord" <#if searchWord??>value="${searchWord}"</#if>
+                       class="form-control">
+                <button style="margin-left: 5px" type="submit" class="btn">Поиск</button>
             </div>
         </form>
 
@@ -120,9 +129,9 @@
                 <#if product.isMenuComponent()>
                     <div class="col-md-3">
                         <div class="card">
-                            <img src="/images/${product.previewImageId}" class="card-img-top" alt="Product Image">
+                            <a href="/product/${product.id}"><img src="/images/${product.previewImageId}" class="card-img-top" alt="Product Image"></a>
                             <div class="card-body">
-                                <h5 class="card-title"><a href="/product/${product.id}">${product.title}</a></h5>
+                                <h5 class="card-title">${product.title}</h5>
                                 <p class="card-text">${product.price} руб.</p>
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
@@ -133,7 +142,8 @@
                                 <#if user.isAdmin()>
                                     <form action="/product/delete/${product.getId()}" method="post">
                                         <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                        <button type="submit" style="border: 0"><img src="https://i.ibb.co/QQ4JzPC/remove.png" style="width: 30px;" alt="remove"></button>
+                                        <button type="submit" style="border: 0; background: transparent"><img src="https://i.ibb.co/QQ4JzPC/remove.png" style="width: 30px;"
+                                                    alt="remove"></button>
                                     </form>
                                 </#if>
                             </div>
@@ -143,7 +153,7 @@
             </#list>
         </div>
     </div>
-    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
