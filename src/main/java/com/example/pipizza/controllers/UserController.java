@@ -70,18 +70,12 @@ public class UserController {
     public String addProduct(@PathVariable Long id, Principal principal) throws IOException {
         if (principal == null)
             return "redirect:/login";
-        User user =  userService.getUserByPrincipal(principal);
-        Product product = productService.getProductById(id);
-        userService.addProduct(user,product);
-        userService.saveUser(userService.getUserByPrincipal(principal));
+        userService.addProduct(id,principal);
         return "redirect:/";
     }
     @PostMapping("/cart/remove/product/{id}")
     public String removeProduct(@PathVariable Long id, Principal principal) throws IOException {
-        User user =  userService.getUserByPrincipal(principal);
-        Product product = productService.getProductById(id);
-        userService.removeProduct(user, product);
-        userService.saveUser(userService.getUserByPrincipal(principal));
+        userService.removeProduct(id, principal);
         return "redirect:/cart";
     }
 

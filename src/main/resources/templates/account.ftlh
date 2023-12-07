@@ -32,7 +32,7 @@
     <hr>
     <h2>Заказы пользователя ${user.name}:</h2>
     <#list orders as order>
-        <div class="card">
+        <div class="card" style="border: none">
             <div class="card-body mb-3">
                 <h3 class="card-title border-bottom border-dark">ID заказа: ${order.id}</h3>
                 <h5>Состав заказа:</h5>

@@ -95,7 +95,7 @@
             <a href="/admin" class="btn">Панель администратора</a>
             <hr>
             <h3>Создать новый товар</h3>
-            <form action="/product/create" method="post" enctype="multipart/form-data">
+            <form action="/admin/product/create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Название объявления:</label>
                     <input type="text" name="title" id="title" class="form-control">
@@ -148,7 +148,7 @@
                                     <button type="submit" class="btn">В корзину</button>
                                 </form>
                                 <#if user.isAdmin()>
-                                    <form action="/product/delete/${product.getId()}" method="post">
+                                    <form action="/admin/product/delete/${product.getId()}" method="post">
                                         <input type="hidden" name="_csrf" value="${_csrf.token}">
                                         <button type="submit" style="border: 0; background: transparent">
                                             <img src="https://i.ibb.co/QQ4JzPC/remove.png" style="width: 30px;"

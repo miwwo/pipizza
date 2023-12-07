@@ -36,7 +36,7 @@
                         <p class="card-text">Цена: ${cart_product.price} руб.</p>
                         <p class="card-text">Количество: ${cart_product.quantity}</p>
                         <div class="text-right">
-                            <a href="/product/${cart_product.id}" class="btn btn-primary">Подробнее...</a>
+                            <a href="/menu/product/${cart_product.id}" class="btn btn-primary" style="background-color: orange;border: none">Подробнее...</a>
                             <form action="/cart/remove/product/${cart_product.getId()}" method="post" class="d-inline ml-2">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                                 <button type="submit" class="btn btn-danger">Удалить</button>
@@ -47,7 +47,7 @@
             </#list>
             <#if (user.cart?size > 0) >
                 <h2 class="text-right">Сумма заказа: ${user.total} руб.</h2>
-                <form action="/user/create/order" method="post" class="mt-3">
+                <form action="/order/create" method="post" class="mt-3">
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                     <button type="submit" class="btn btn-success">Сделать заказ!</button>
                 </form>

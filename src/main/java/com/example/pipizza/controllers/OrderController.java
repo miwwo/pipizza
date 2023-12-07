@@ -27,14 +27,13 @@ public class OrderController {
         return "order-info";
     }
 
-    @PostMapping("/user/create/order")
+    @PostMapping("/order/create")
     public String createOrder(Principal principal) throws IOException {
         User user = userService.getUserByPrincipal(principal);
         orderService.createOrder(user);
         userService.saveUser(user);
         return "redirect:/account";
     }
-
     @PostMapping("/order/delete/{id}")
     public String deleteOrder(@PathVariable Long id) {
         orderService.deleteOrder(id);

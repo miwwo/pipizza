@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final ProductService productService;
     private final PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user) {
@@ -39,34 +40,26 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void banUser(Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        if (user != null) {
-            if (user.isActive()) {
-                user.setActive(false);
-                log.info("Ban user with id = {}; email: {}", user.getId(), user.getEmail());
-            } else {
-                user.setActive(true);
-                log.info("Unban user with id = {}; email: {}", user.getId(), user.getEmail());
-            }
-        }
-        userRepository.save(user);
-    }
-
     public void saveUser(User user){
         userRepository.save(user);
     }
 
-    public void addProduct(User user, Product product){
+    public void addProduct(Long id, Principal principal){
+        User user = getUserByPrincipal(principal);
+        Product product = productService.getProductById(id);
         if (user.getCart().contains(product)){
             user.getCart().remove(product);
             product.setQuantity(product.getQuantity()+1);
         }
         user.getCart().add(product);
         user.setTotal(user.getTotal() + product.getPrice());
+        saveUser(user);
     }
 
-    public void removeProduct(User user, Product product){
+    public void removeProduct(Long id, Principal principal){
+        User user = getUserByPrincipal(principal);
+        Product product = productService.getProductById(id);
+
         if (user.getCart().contains(product)) {
             user.getCart().remove(product);
             user.setTotal(user.getTotal() - product.getPrice());
@@ -75,6 +68,7 @@ public class UserService {
                 user.getCart().add(product);
             }
         }
+        saveUser(user);
     }
 
 

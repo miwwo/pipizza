@@ -1,6 +1,7 @@
 package com.example.pipizza.controllers;
 
 import com.example.pipizza.models.Product;
+import com.example.pipizza.services.AdminService;
 import com.example.pipizza.services.ProductService;
 import com.example.pipizza.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.io.IOException;
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminController {
     private final UserService userService;
+    private final AdminService adminService;
     private final ProductService productService;
 
     @GetMapping("/admin")
@@ -30,16 +32,16 @@ public class AdminController {
 
     @PostMapping("/admin/user/ban/{id}")
     public String userBan(@PathVariable("id") Long id) {
-        userService.banUser(id);
+        adminService.banUser(id);
         return "redirect:/admin";
     }
-    @PostMapping("/product/create")
+    @PostMapping("/admin/product/create")
     public String createProduct(@RequestParam("file1") MultipartFile file1, Product product) throws IOException {
         productService.saveProduct(product, file1);
         return "redirect:/";
     }
 
-    @PostMapping("/product/delete/{id}")
+    @PostMapping("/admin/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.removeFromMenu(id);
         return "redirect:/";

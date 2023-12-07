@@ -23,9 +23,6 @@ public class Order {
     @Column(name = "total")
     private double total;
 
-    /*@ElementCollection
-    private List<Product> orderComponents = new ArrayList<>();*/
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "order_products",

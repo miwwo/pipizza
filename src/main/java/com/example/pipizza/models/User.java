@@ -23,14 +23,10 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
     @Column(name = "active")
-    private boolean active;
+    private boolean active = true;
 
-    @Column(name = "password", length = 1000)
+    @Column(name = "password", length = 60)
     private String password;
-
-    /*@ElementCollection
-    private List<Product> cart = new ArrayList<>();*/
-
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -40,7 +36,7 @@ public class User implements UserDetails {
     )
     private List<Product> cart = new ArrayList<>();
 
-    private double total = 0;
+    private double total = 0.0;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
@@ -51,7 +47,7 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
-    // security
+    // Security
 
     public boolean isAdmin() {
         return roles.contains(Role.ROLE_ADMIN);
