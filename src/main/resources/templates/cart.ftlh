@@ -20,6 +20,10 @@
             top: 10px;
             left: 10px
         }
+        .card-body{
+            border-radius: 20px;
+            border: 5px solid black;
+        }
     </style>
 </head>
 <body>
@@ -31,7 +35,7 @@
             <h3>Корзина пользователя: ${user.name}</h3>
             <#list cart_products as cart_product>
                 <div class="card mb-1">
-                    <div class="card-body">
+                    <div class="card-body" style="border: none">
                         <h5 class="card-title">${cart_product.title}</h5>
                         <p class="card-text">Цена: ${cart_product.price} руб.</p>
                         <p class="card-text">Количество: ${cart_product.quantity}</p>

@@ -47,7 +47,7 @@
         }
 
         a:hover {
-            color: #000000;
+            color: aqua;
             text-decoration: none;
         }
 
@@ -91,31 +91,6 @@
         </form>
         <a href="/account" class="btn">Личный кабинет</a>
         <a href="/cart" class="btn">Корзина</a>
-        <#if user.isAdmin()>
-            <a href="/admin" class="btn">Панель администратора</a>
-            <hr>
-            <h3>Создать новый товар</h3>
-            <form action="/admin/product/create" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="title">Название объявления:</label>
-                    <input type="text" name="title" id="title" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="description">Описание объявления:</label>
-                    <input type="text" name="description" id="description" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="price">Цена:</label>
-                    <input type="number" name="price" id="price" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="file1">Фотография продукта:</label>
-                    <input type="file" name="file1" id="file1" class="form-control-file">
-                </div>
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <input type="submit" value="Добавить товар" class="btn">
-            </form>
-        </#if>
     <#else>
         <a href="/login" class="btn btn-log">Войти</a>
     </#if>

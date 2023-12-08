@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
@@ -16,16 +17,23 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "email", unique = true)
+
+    @Column(name = "email", unique = true, length = 63)
+    @NotNull
     private String email;
-    @Column(name = "phone_number")
+
+    @Column(name = "phone_number", length = 11)
     private String phoneNumber;
-    @Column(name = "name")
+
+    @Column(name = "name", length = 31)
+    @NotNull
     private String name;
+
     @Column(name = "active")
     private boolean active = true;
 
-    @Column(name = "password", length = 60)
+    @Column(name = "password", length = 63)
+    @NotNull
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)

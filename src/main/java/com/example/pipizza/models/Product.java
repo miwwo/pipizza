@@ -1,12 +1,14 @@
 package com.example.pipizza.models;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,22 +22,37 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-    @Column(name = "title")
+
+    @Column(name = "title", length = 63)
+    @NotNull
     private String title;
+
     @Column(name = "description", columnDefinition = "text")
+    @NotNull
     private String description;
+
     @Column(name = "price")
-    private int price;
+    @Min(value = 1, message = "Укажите корректную цену")
+    @NotNull(message = "Укажите корректную цену")
+    private Double price;
+
     @Column(name = "menu_component")
+    @NotNull
     private boolean menuComponent = true;
+
     @Column()
     @NotNull
-    @Min(value = 1, message = "Quantity must be greater than or equal to zero")
+    @Min(value = 1, message = "Quantity must be greater than one")
     private int quantity = 1;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            mappedBy = "product")
+    private List<Image> images = new ArrayList<>();
+    private Long previewImageId;
 
     public Product(String title,
                    String description,
-                   int price,
+                   double price,
                    int quantity,
                    Long previewImageId,
                    boolean menuComponent) {
@@ -46,11 +63,6 @@ public class Product {
         this.previewImageId = previewImageId;
         this.menuComponent = menuComponent;
     }
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "product")
-    private List<Image> images = new ArrayList<>();
-    private Long previewImageId;
 
 
     public void addImageToProduct(Image image) {

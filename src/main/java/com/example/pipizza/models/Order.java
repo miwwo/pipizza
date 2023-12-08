@@ -5,23 +5,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "total")
-    private double total;
+    @NotNull
+    private double total = 0.0;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -39,8 +42,6 @@ public class Order {
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
-        //orderComponents.addAll(user.getCart());
-        //setTotal(user.getTotal());
     }
 
 }
