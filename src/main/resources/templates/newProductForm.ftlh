@@ -12,33 +12,8 @@
             font-family: Georgia, serif;
         }
 
-        .card {
-            width: 100%;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            transition: transform 0.3s ease;
-        }
-
-        .card-img-top {
-            height: 250px;
-            padding-left: 11px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .card-img-popup{
-            height: 500px;
-        }
-
         .card:hover .card-img-top {
             transform: scale(1.1);
-        }
-
-        .card-body {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
         a {
@@ -47,7 +22,7 @@
         }
 
         a:hover {
-            color: aqua;
+            color: #000000;
             text-decoration: none;
         }
 
@@ -69,10 +44,6 @@
             background-color: #ffa600;
         }
 
-        .menu {
-            margin-top: 10%;
-        }
-
         body {
             max-width: 100%;
         }
@@ -83,7 +54,6 @@
     <h1 class="title"><a href="/"><strong>PIPIZZA</strong> <img src="https://i.ibb.co/vqX1LfW/logo.png" alt="logo"
                                                                 border="0" style="width: 45px"></a></h1>
     <hr>
-    <#if user.email??>
         <h3>Имя пользователя: <i>${user.name}</i></h3>
         <form action="/logout" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -91,7 +61,6 @@
         </form>
         <a href="/account" class="btn">Личный кабинет</a>
         <a href="/cart" class="btn">Корзина</a>
-        <#if user.isAdmin()>
             <a href="/admin" class="btn">Панель администратора</a>
             <hr>
             <h3>Создать новый товар</h3>
@@ -99,10 +68,16 @@
                 <div class="form-group">
                     <label for="title">Название объявления:</label>
                     <input type="text" name="title" id="title" class="form-control">
+                    <#if bindingResult?has_content && bindingResult.hasFieldErrors("title")>
+                        <p style="color: red">${bindingResult.getFieldError("title").defaultMessage}</p>
+                    </#if>
                 </div>
                 <div class="form-group">
                     <label for="description">Описание объявления:</label>
                     <input type="text" name="description" id="description" class="form-control">
+                    <#if bindingResult?has_content && bindingResult.hasFieldErrors("description")>
+                        <p style="color: red">${bindingResult.getFieldError("description").defaultMessage}</p>
+                    </#if>
                 </div>
                 <div class="form-group">
                     <label for="price">Цена:</label>
@@ -121,8 +96,6 @@
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <input type="submit" value="Добавить товар" class="btn">
             </form>
-        </#if>
-    </#if>
     </div>
 </div>
 

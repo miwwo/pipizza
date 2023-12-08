@@ -47,7 +47,7 @@
         }
 
         a:hover {
-            color: aqua;
+            color: #000000;
             text-decoration: none;
         }
 
@@ -76,6 +76,12 @@
         body {
             max-width: 100%;
         }
+        .remove-button:focus{
+            border: 0;
+            background: transparent;
+            outline: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -91,6 +97,10 @@
         </form>
         <a href="/account" class="btn">Личный кабинет</a>
         <a href="/cart" class="btn">Корзина</a>
+         <#if user.isAdmin()>
+            <a href="/admin" class="btn">Панель администратора</a>
+            <hr>
+         </#if>
     <#else>
         <a href="/login" class="btn btn-log">Войти</a>
     </#if>
@@ -100,6 +110,11 @@
                 <label for="searchWord"></label>
                 <input placeholder="Поиск" type="text" name="searchWord" <#if searchWord??>value="${searchWord}"</#if>
                        class="form-control">
+                    <label style="margin-left: 10px" for="sort">Сортировка:</label>
+                    <select style="width: 500px" name="sort" class="form-control">
+                        <option value="price_asc">По возрастанию цены</option>
+                        <option value="price_desc">По убыванию цены</option>
+                    </select>
                 <button style="margin-left: 5px" type="submit" class="btn">Поиск</button>
             </div>
         </form>
@@ -125,7 +140,7 @@
                                 <#if user.isAdmin()>
                                     <form action="/admin/product/delete/${product.getId()}" method="post">
                                         <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                        <button type="submit" style="border: 0; background: transparent">
+                                        <button type="submit" class="remove-button" style="border: 0; background: transparent">
                                             <img src="https://i.ibb.co/QQ4JzPC/remove.png" style="width: 30px;"
                                                  alt="remove"></button>
                                     </form>

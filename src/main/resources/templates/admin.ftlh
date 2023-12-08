@@ -10,26 +10,41 @@
         body {
             font-family: Georgia, serif;
         }
+
+        .card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
         a {
-            color: black;
+            color: #000000;
             text-decoration: none;
         }
+
         a:hover {
-            color: black;
+            color: #000000;
             text-decoration: none;
         }
+
+        .btn-log {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
         .title {
-            top: 5px;
-            left: 10px;
-            font-size: 2.5rem;
-        }
-        table {
-            margin-top: 20px;
-        }
-        .title{
             position: absolute;
             top: 10px;
             left: 10px
+        }
+
+        .btn {
+            border-color: #ffa600;
+            border-radius: 50px;
+            background-color: #ffa600;
+        }
+
+        body {
+            max-width: 100%;
         }
     </style>
 </head>
@@ -39,6 +54,15 @@
 </h1>
 <div class="container">
         <div class="container mt-5">
+            <h3>Имя пользователя: <i>${user.name}</i></h3>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type="submit" value="Выйти" class="btn btn-log">
+            </form>
+            <a href="/account" class="btn">Личный кабинет</a>
+            <a href="/cart" class="btn">Корзина</a>
+            <a href="/admin/getNewProductForm" class="btn">Создать товар</a>
+            <hr>
         <div class="row">
             <div class="col">
                 <h4 class="mb-4">Панель администратора</h4>

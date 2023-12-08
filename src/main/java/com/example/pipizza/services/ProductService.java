@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -19,11 +20,29 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    public List<Product> listProducts(String title) {
+    public List<Product> listProducts(String title, String sortBy) {
         if (title != null && !title.isEmpty()) {
-            return productRepository.findByTitleContaining(title);
+            if(sortBy != null &&!sortBy.isEmpty()) {
+                List<Product> products = productRepository.findByTitleContaining(title);
+                sortProductsBy(sortBy, products);
+                return products;
+            }
+                return productRepository.findByTitleContaining(title);
         } else {
+            if(sortBy != null && !sortBy.isEmpty()) {
+                List<Product> products = productRepository.findAll();
+                sortProductsBy(sortBy, products);
+                return products;
+            }
             return productRepository.findAll();
+        }
+    }
+
+    public void sortProductsBy(String sortBy, List<Product> products){
+        if ("price_asc".equals(sortBy)) {
+            products.sort(Comparator.comparing(Product::getPrice));
+        } else if ("price_desc".equals(sortBy)) {
+            products.sort(Comparator.comparing(Product::getPrice).reversed());
         }
     }
 

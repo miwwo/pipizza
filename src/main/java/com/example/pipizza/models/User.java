@@ -6,7 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
@@ -19,21 +21,23 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "email", unique = true, length = 63)
-    @NotNull
+    @NotNull(message = "Это поле необходимо заполнить")
+    @Email(message = "Введите корректный email")
     private String email;
 
     @Column(name = "phone_number", length = 11)
+    @Size(min=11, message = "Номер телефона должен содердать 11 символов")
     private String phoneNumber;
 
     @Column(name = "name", length = 31)
-    @NotNull
+    @NotNull(message = "Это поле необходимо заполнить")
     private String name;
 
     @Column(name = "active")
     private boolean active = true;
 
     @Column(name = "password", length = 63)
-    @NotNull
+    @NotNull(message = "Это поле необходимо заполнить")
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)

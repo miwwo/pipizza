@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +21,13 @@ public class Product {
     private Long id;
 
     @Column(name = "title", length = 63)
-    @NotNull
+    @NotNull(message = "Укажите название продукта)")
+    @Size(min=2, max=50, message = "Название должно содержать от 2 до 50 символов")
     private String title;
 
     @Column(name = "description", columnDefinition = "text")
-    @NotNull
+    @NotNull(message = "Укажите описание товара" )
+    @Size(min=10, max=250, message = "Описание должно содержать от 10 до 100 символов")
     private String description;
 
     @Column(name = "price")

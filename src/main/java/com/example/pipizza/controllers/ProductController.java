@@ -17,15 +17,17 @@ import java.security.Principal;
 public class ProductController {
     private final ProductService productService;
     private final UserService userService;
-
     @GetMapping("/")
-    public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
-        model.addAttribute("products", productService.listProducts(title));
+    public String products(
+            @RequestParam(name = "searchWord", required = false) String title,
+            @RequestParam(name = "sort", required = false) String sort,
+            Principal principal,
+            Model model) {
+        model.addAttribute("products", productService.listProducts(title, sort));
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
         return "products";
     }
-
     @GetMapping("/menu/product/{id}")
     public String productInfo(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
